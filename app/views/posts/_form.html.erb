@@ -1,0 +1,22 @@
+<div class="well">
+  <%= form_for @post do |f| %>
+    <div class="control-group">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="control-group">
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+    </div>
+    <div class="control-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, rows: 5 %>
+    </div>
+    <div class="control-group">
+      <% selected = @post.categories.collect { |category| category.id } %>
+      <%= f.collection_select(:category_ids, Category.all, :id, :name, {}, multiple: true) %>
+    </div>
+
+    <%= submit_tag @post.id ? 'Edit' : 'Create', class: 'btn btn-primary' %>
+  <% end %>
+</div>
